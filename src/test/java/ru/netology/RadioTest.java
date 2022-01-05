@@ -16,9 +16,9 @@ class RadioTest {
     @Test
     public void shouldSetStationAboveMax() {
         Radio radio = new Radio();
-        radio.setCurrentStation(3);
-        radio.setCurrentStation(15);
-        assertEquals(3, radio.getCurrentStation());
+        radio.setCurrentStation(9);
+        radio.setCurrentStation(10);
+        assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
@@ -57,25 +57,25 @@ class RadioTest {
     @Test
     public void shouldIncreaseVolume() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(5);
+        radio.setCurrentVolume(2);
         radio.increaseVolume();
-        assertEquals(6, radio.getCurrentVolume());
+        assertEquals(3, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldReduceVolume() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(3);
+        radio.setCurrentVolume(17);
         radio.decreaseVolume();
-        assertEquals(2, radio.getCurrentVolume());
+        assertEquals(16, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldIncreaseVolumeWhenMax() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
@@ -89,7 +89,7 @@ class RadioTest {
     @Test
     public void shouldSetVolumeAboveMax() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(11);
+        radio.setCurrentVolume(999);
         assertEquals(0, radio.getCurrentVolume());
     }
 
@@ -98,5 +98,24 @@ class RadioTest {
         Radio radio = new Radio();
         radio.setCurrentVolume(-1);
         assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldChangeMaxStation() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(9);
+        radio.setAmountStation(8);
+        radio.nextStation();
+        assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldSetMaxStationZero() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(0);
+        radio.prevStation();
+        radio.setAmountStation(0);
+        radio.prevStation();
+        assertEquals(8, radio.getCurrentStation());
     }
 } 
